@@ -9,12 +9,12 @@ const phaseIndex={intro:0,eat:0,run:1,result:1,care:2,finish:2,cta:3};
 const phaseLabels={intro:'まもなくスタート',eat:'食べる楽しさ、満喫！',run:'8秒の運動チャレンジ',result:'チャレンジ、おつかれさま！',care:'毎日のコーヒーに、ひと工夫',finish:'今日から、1日1杯の習慣',cta:'SMART BLACK'};
 function beep(freq=520){if(!sound)return;try{audio=audio||new(window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume();const osc=audio.createOscillator(),gain=audio.createGain();osc.type='sine';osc.frequency.value=freq;gain.gain.setValueAtTime(.055,audio.currentTime);gain.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.12);osc.connect(gain);gain.connect(audio.destination);osc.start();osc.stop(audio.currentTime+.13);}catch{}}
 function feedback(text,duration=.85){$('feedback').textContent=text;feedbackUntil=flow.total+duration;$('feedback').classList.add('show');}
-function clearEffects(){for(const f of flights){f.animation.cancel();f.el.remove();}flights.clear();$('character').classList.remove('chew','stepping');feedbackUntil=stepUntil=chewUntil=0;$('feedback').classList.remove('show');}
+function clearEffects(){for(const f of flights){f.animation.cancel();f.el.remove();}flights.clear();$('character').classList.remove('chew','stepping');feedbackUntil=stepUntil=chewUntil=0;$('feedback').classList.remove('show');$('feedback').textContent='';}
 function setCharacter(){const keys=['slim','chubby','fat','round'];const src=A[keys[flow.level()]];for(const img of document.querySelectorAll('.character-layer'))img.src=src;}
 function enter(){
   phase=flow.phase;app.dataset.phase=phase;clearEffects();
   $('intro').hidden=phase!=='intro';$('care').hidden=!['care','finish'].includes(phase);$('cta').hidden=phase!=='cta';
-  $('game-header').hidden=phase==='cta';$('controls').hidden=phase==='cta';
+  $('stage').hidden=phase==='cta';$('game-header').hidden=phase==='cta';$('controls').hidden=phase==='cta';
   $('eat-actions').hidden=phase!=='eat';$('run-actions').hidden=phase!=='run';$('care-actions').hidden=!['care','finish'].includes(phase);
   $('meter').hidden=!['eat','run'].includes(phase);$('stage-note').hidden=!['eat','run','result'].includes(phase);
   $('stage-note').textContent=phase==='eat'?'食べるボタンをタップ':phase==='run'?'左右にスワイプでもOK':'あなたのチャレンジ結果';

@@ -37,3 +37,10 @@
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
 #intro-message{white-space:pre-line}
+
+#plate,.flying-food{border-radius:50%}
+#plate{width:44%;height:auto;aspect-ratio:1;max-height:80%;object-fit:cover;top:7%;box-shadow:0 8px 14px #492b2130}
+/* Keep product, cup and feature labels inside short viewports. */
+#care{display:flex;flex-direction:column}
+#care h2,#care .care-sub,.care-tags,.care-hint{flex-shrink:0}
+.care-visual{flex:1;width:100%;height:auto!important;min-height:0!important;margin:8px auto!important}
