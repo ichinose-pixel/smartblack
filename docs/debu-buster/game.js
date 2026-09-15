@@ -73,7 +73,7 @@ document.addEventListener('keydown',e=>{
  if(phase==='run'&&['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();step(e.key==='ArrowLeft'?'left':'right');}
 });
 document.addEventListener('visibilitychange',()=>{last=performance.now();swipe=null;});
-function tick(now){const dt=(now-last)/1000;last=now;if(ready&&!document.hidden&&phase!=='cta'){flow.advance(Math.min(dt,.25));paint();}requestAnimationFrame(tick);}
+function tick(now){const dt=(now-last)/1000;last=now;if(ready&&!document.hidden&&phase!=='cta'){flow.advance(dt);paint();}requestAnimationFrame(tick);}
 // Decode before enabling actions; no handlers can reference an unready scene.
 async function boot(){
   try{
